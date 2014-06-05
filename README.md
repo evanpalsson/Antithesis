@@ -42,12 +42,12 @@ let me know!
 * Configure a set of instruments you are interested in
 * Simple, clean and basic charting suitable for price action trading with a set of global
 options applying to all instruments, configurable by period (1D,4H,1H, etc)
-** Simple Moving Averages
-** Exponential Moving Averages
-** Colours
+  * Simple Moving Averages
+  * Exponential Moving Averages
+  * Colours
 * Record chart configuration per period (1D, 4H, 1H), allowing review of your 
 previous analysis, forming a comprehensive trade diary.
-** Simple way to mark support and resistance levels
-** Analysis Notes
-** Ability to project support and resistance levels between time frames
+  * Simple way to mark support and resistance levels
+  * Analysis Notes
+  * Ability to project support and resistance levels between time frames
 
