@@ -9,7 +9,8 @@
 
 	var module = angular.module('antithesisApp', [
 		'ngRoute',
-		'ant-connect'
+		'ant-connect',
+		'ant-oanda'
 	]);
 
 	// register our basic routes

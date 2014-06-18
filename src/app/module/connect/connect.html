@@ -2,8 +2,28 @@
 	<div class="container">
 		<h1>Antithesis<i class="text-primary pull-right fa fa-bar-chart-o fa-3x"></i></h1>
 		<p>OANDA Trading from your browser</p>
-		<p>{{test}}</p>
-		<p><a href="#" class="btn btn-primary">Connect <i class="fa fa-angle-double-right"></i></a></p>
+
+		<div class="row">
+			<div class="col-md-5">
+				<div class="btn-group btn-group-lg">
+					<button class="btn" ng-class="{'btn-default': !isLive(), 'btn-danger': isLive()}" ng-click="setLive()">Live</button>
+					<button class="btn" ng-class="{'btn-default': !isPractice(), 'btn-success': isPractice()}" ng-click="setPractice()">Practice</button>
+				</div> 
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-fw fa-lg fa-key"></i></span>
+					<input class="form-control input-lg" type="password" id="apiKey" ng-model="apiKey" placeholder="API Key" />
+				</div>  
+			</div>  
+		</div>
+			
+		<div class="space-above text-danger" ng-show="error" ng-bind="error"></div>
+		<div class="space-above text-info" ng-show="message" ng-bind="message"></div>
+			
+		<div class="space-above"><button class="btn btn-primary" ng-click="connect()">Connect <i class="fa fa-angle-double-right"></i></button></div>
 	</div>
 </div>
 
@@ -23,7 +43,13 @@
 			</p>
 			<p>
 			Your API Key is used <strong>only in your own browser</strong>, and only sent to the
-			OANDA servers.
+			OANDA servers over HTTPS connections.
 			</p>
 		</div>
 	</div>	
+
+	<div class="space-above" ng-show="accounts">
+		<h4>Accounts</h4>
+		<pre>{{ accounts | json }}</pre>
+	</div>
+</div>
