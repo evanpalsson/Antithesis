@@ -7,6 +7,19 @@ namespace Antithesis.Code
 	{
 		public void ProcessRequest(HttpContext context)
 		{
+			// Verify that the IIS server as at lease authenticated the request.
+			// This is designed to stop servers from accidentally exposing
+			// a method to write files to the server without having the user authenticate.
+			if(!context.Request.IsAuthenticated)
+			{
+				context.Response.StatusCode = 403;
+				context.Response.StatusDescription = "Not Cool. Authentication is not enabled.";
+				context.Response.TrySkipIisCustomErrors = true;
+				context.Response.End();
+				return;
+			}
+		
+			// TODO: Validate file content, mime type and size, then write the file into the site folder.
 			context.Response.StatusCode = 200;
 			context.Response.StatusDescription = "Ok, cool.";
 			context.Response.ContentEncoding = System.Text.Encoding.UTF8;
