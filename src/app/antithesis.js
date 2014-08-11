@@ -10,6 +10,7 @@
 	var module = angular.module('antithesisApp', [
 		'ngRoute',
 		'ant-connect',
+		'ant-main',
 		'ant-oanda'
 	]);
 

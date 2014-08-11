@@ -17,7 +17,7 @@
 	}]);
 
 	// define the connect / sign in controller
-	module.controller('ConnectCtrl', ['$scope', 'oanda', function ($scope, oanda) {
+	module.controller('ConnectCtrl', ['$scope', '$location', 'oanda', function ($scope, $location, oanda) {
 		$scope.message = '';
 		$scope.error = '';
 
@@ -32,12 +32,17 @@
 
 			// fetch the accounts data 
 			oanda.fetchAccounts($scope.accountMode, $scope.apiKey).then(function (accounts) {
-				$scope.accounts = accounts;
+				$scope.accounts = accounts.accounts;
 			}, function (reason) {
 				$scope.error = reason;
 			})['finally'](function () {
 				$scope.message = '';
 			});
+		};
+		
+		$scope.selectAccount = function (account) {
+			oanda.selectAccount(account);
+			$location.path('/main');
 		};
 
 		$scope.isLive = function () {

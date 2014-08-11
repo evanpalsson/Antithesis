@@ -6,7 +6,7 @@
 	var module = angular.module('ant-oanda', [
 		'ant-local-storage'
 	]),
-		config = {
+		config = {		// raw settings used in this module
 			live: {
 				name: 'Live',
 				api: 'https://api-fxtrade.oanda.com',
@@ -24,6 +24,7 @@
 	module.factory('oanda', ['$http', '$q', 'localStorage', function ($http, $q, localStorage) {
 		var apiKey = '',
 			mode = null,
+			account = null,
 			t;
 
 		function setMode(newMode) {
@@ -79,7 +80,19 @@
 				localStorage.set('TradingAccount', {mode: mode.name, apiKey: apiKey});
 
 				return httpGet('/v1/accounts');
-			}
+			},
+
+			// configure which account to use for all normal requests.
+			selectAccount: function (newAccount) {
+				if (newAccount === undefined || newAccount === null) {
+					throw new Error('Expected an account');
+				}
+
+				account = newAccount;
+			},
+
+			// get the current account
+			currentAccount: function () { return account; }
 		};
 	}]);
 

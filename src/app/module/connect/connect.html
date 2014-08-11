@@ -23,12 +23,23 @@
 		<div class="space-above text-danger" ng-show="error" ng-bind="error"></div>
 		<div class="space-above text-info" ng-show="message" ng-bind="message"></div>
 			
-		<div class="space-above"><button class="btn btn-primary" ng-click="connect()">Connect <i class="fa fa-angle-double-right"></i></button></div>
+		<div class="space-above"><button class="btn" ng-class="{ 'btn-primary': !accounts }" ng-click="connect()">Fetch Accounts <i class="fa fa-angle-double-right"></i></button></div>
+		
+		<div class="space-above row" ng-show="accounts">
+			<div class="col-md-5">
+				<select class="form-control" ng-model="mySelectedAccount" ng-options="a.accountName + ' (' + a.accountCurrency + ', '+ a.accountId + ')' group by a.accountCurrency for a in accounts">
+					<option value="">-- choose --</value>
+				</select>
+			</div>
+		</div>
+		<div class="space-above"  ng-show="accounts">
+			<button class="btn btn-success" ng-click="selectAccount(mySelectedAccount)" ng-disabled="!mySelectedAccount">Start <i class="fa fa-angle-double-right"></i></button>
+		</div>
 	</div>
 </div>
 
 <div class="container">
-	<div class="panel panel-info">
+	<div class="panel panel-info" ng-hide="accounts">
 		<div class="panel-heading">
 			<h3 class="panel-title">API Key</h3>
 		</div>
@@ -46,10 +57,5 @@
 			OANDA servers over HTTPS connections.
 			</p>
 		</div>
-	</div>	
-
-	<div class="space-above" ng-show="accounts">
-		<h4>Accounts</h4>
-		<pre>{{ accounts | json }}</pre>
 	</div>
 </div>
