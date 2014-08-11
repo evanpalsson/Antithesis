@@ -7,3 +7,40 @@
 {
 	margin-top: 20px;
 }
+
+/* application layout */
+#full-window {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#content-window {
+	position: absolute;
+	top: 0;
+	bottom: 25px;
+	left: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#status-bar {
+	background-color: #ccc;
+	vertical-align: middle;
+
+	position: absolute;
+	height: 25px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
