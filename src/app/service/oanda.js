@@ -44,10 +44,11 @@
 			setMode('Practice');
 		}
 
-		function httpGet(relativeUrl) {
+		function httpGet(relativeUrl, data) {
 			return $http.get(mode.api + relativeUrl, {
 				cache: false,
 				responseType: 'json',
+				params: data,
 				headers: {
 					'Authorization': 'Bearer ' + apiKey
 				}
@@ -92,7 +93,27 @@
 			},
 
 			// get the current account
-			currentAccount: function () { return account; }
+			currentAccount: function () { return account; },
+			
+			// Get historical candles for an instrument
+			getCandles: function (instrument, granularity, count) {
+				return httpGet('/v1/candles', {
+					instrument: instrument,
+					granularity: granularity,
+					count: count,
+					candleFormat: 'midpoint'
+				}).then(function (data) {
+					// transform time from UTC RFC3339 string to date (local time)
+					angular.forEach(data.candles, function(c) {
+						if (typeof c.time === 'string') {
+							c.time = new Date(c.time);
+						}
+					});
+					return data;
+				});
+			}
+			
+			
 		};
 	}]);
 

@@ -39,7 +39,7 @@
 				$scope.message = '';
 			});
 		};
-		
+
 		$scope.selectAccount = function (account) {
 			oanda.selectAccount(account);
 			$location.path('/main');
